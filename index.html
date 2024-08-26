@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAGR Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      label {
+        display: block;
+        margin: 15px 0 5px;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      p.result {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>CAGR Calculator</h2>
+      <label for="initialInvestment">Initial Investment (₹):</label>
+      <input
+        type="number"
+        id="initialInvestment"
+        placeholder="Enter total initial investment"
+      />
+
+      <label for="finalValue">Final Value (₹):</label>
+      <input
+        type="number"
+        id="finalValue"
+        placeholder="Enter final value received"
+      />
+
+      <label for="years">Number of Years:</label>
+      <input type="number" id="years" placeholder="Enter number of years" />
+
+      <button onclick="calculateCAGR()">Calculate CAGR</button>
+
+      <p class="result" id="result"></p>
+    </div>
+
+    <script>
+      function calculateCAGR() {
+        const initialInvestment = parseFloat(
+          document.getElementById("initialInvestment").value
+        );
+        const finalValue = parseFloat(
+          document.getElementById("finalValue").value
+        );
+        const years = parseFloat(document.getElementById("years").value);
+
+        if (
+          isNaN(initialInvestment) ||
+          isNaN(finalValue) ||
+          isNaN(years) ||
+          years <= 0
+        ) {
+          document.getElementById("result").innerText =
+            "Please enter valid inputs.";
+          return;
+        }
+
+        const cagr = (finalValue / initialInvestment) ** (1 / years) - 1;
+        const percentageReturn = (cagr * 100).toFixed(2);
+
+        document.getElementById(
+          "result"
+        ).innerText = `The CAGR is ${percentageReturn}% per annum.`;
+      }
+    </script>
+  </body>
+</html>
